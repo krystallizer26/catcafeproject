@@ -1,23 +1,32 @@
 import logo from './logo.svg';
+
+//Routing
+import { Switch, Route } from "react-router-dom"
+
+//Components
+import NotFound from "./NotFound/NotFound.js"
+import NavBar from "./NavBar/NavBar.js"
+import MainPage from "./MainPage/MainPage.js"
+import Cuisine from "./Cuisine/Cuisine.js"
+import CuisineLanding from "./CuisineLanding/CuisineLanding.js"
+import Familiar from "./Familiar/Familiar.js"
+import FamiliarLanding from "./FamiliarLanding/FamiliarLanding.js"
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" render={(routeProps) => <MainPage {...routeProps} />} />
+        <Route exact path="/cuisine/" render={(routeProps) => <CuisineLanding {...routeProps} />} />
+        <Route exact path="/cuisine/:cuisineType" render={(routeProps) => <Cuisine {...routeProps} />} />
+        <Route exact path="/familiar/" render={(routeProps) => <FamiliarLanding {...routeProps} />} />
+        <Route exact path="/familiar/:familiarType" render={(routeProps) => <Familiar {...routeProps} />} />
+        <Route render={(routeProps) => <NotFound {...routeProps} />} />
+      </Switch>
+      
     </div>
   );
 }
